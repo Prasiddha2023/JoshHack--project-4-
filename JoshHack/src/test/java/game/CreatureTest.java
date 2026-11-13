@@ -23,6 +23,7 @@ public class CreatureTest {
         world = new World(tiles);
 
         creature = new Creature(world, '@', Color.GRAY, "josh", 100, 10, 5);
+        new CreatureAi(creature);
 
         creature.x = 1;
         creature.y = 1;
@@ -54,9 +55,14 @@ public class CreatureTest {
 
     @Test
     void testDeathAtZeroHp() {
+        world.add(creature);
+
+        assertSame(creature, world.creature(1, 1, 0));
+
         creature.modifyHp(-90, "damage");
         creature.modifyHp(-10, "damage");
 
         assertEquals(0, creature.hp());
+        assertNull(world.creature(1, 1, 0));
     }
 }
