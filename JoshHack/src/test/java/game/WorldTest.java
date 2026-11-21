@@ -110,6 +110,17 @@ class WorldTest {
     }
 
     @Test
+    void color_creatureLocationReturnsCreatureColor() {
+        Creature creature = new Creature(world, '@', Color.MAGENTA, "hero", 100, 10, 5);
+        creature.x = 1;
+        creature.y = 1;
+        creature.z = 0;
+        world.add(creature);
+
+        assertSame(Color.MAGENTA, world.color(1, 1, 0));
+    }
+
+    @Test
     void item_emptyLocationReturnsNull() {
         assertNull(world.item(1, 1, 0));
     }
